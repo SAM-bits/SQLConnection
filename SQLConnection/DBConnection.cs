@@ -14,7 +14,7 @@ namespace SQLConnection
         public void ConnectToDB()
         {
             //connectin to DB
-            string connString = "Data Source=mssql4.unoeuro.com;Initial Catalog=sambits_dk_db_Saif_DB;User ID=sambits_dk;Password=********;Connect Timeout=30;Encrypt=True;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;Command Timeout=30";
+            string connString = "Data Source=mssql4.unoeuro.com;Initial Catalog=sambits_dk_db_Saif_DB;User ID=sambits_dk;Password=wAtmzHp3dkyDG4bx6ErR ;Connect Timeout=30;Encrypt=True;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;Command Timeout=30";
 
             //Create Connection to DB
             _sqlConn = new SqlConnection(connString);
@@ -23,10 +23,17 @@ namespace SQLConnection
 
         public bool PasswordChecker(string username, string password)
         {
-            string sql = $"SELECT * FROM logintest where username=@username AND password=@password";
+            string sql = $"SELECT * FROM LoginTest where username=@username AND password=@password";
             SqlCommand cmd = new SqlCommand(sql,_sqlConn);
             cmd.Parameters.AddWithValue("@username", username);
             cmd.Parameters.AddWithValue("@password", password);
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                return true;
+            }
+            return false;
         }
 
     }
