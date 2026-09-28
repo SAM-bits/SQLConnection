@@ -4,10 +4,10 @@ namespace SQLConnection
 {
     public class DBConnection
     {
-        //instant felter 
-        SqlConnection _sqlConn;
+        //instant felter
+        private SqlConnection _sqlConn;
 
-        //consturctor 
+        //consturctor
         public DBConnection() { }
 
         //methode
@@ -24,7 +24,7 @@ namespace SQLConnection
         public bool PasswordChecker(string username, string password)
         {
             string sql = $"SELECT * FROM LoginTest where username=@username AND password=@password";
-            SqlCommand cmd = new SqlCommand(sql,_sqlConn);
+            SqlCommand cmd = new SqlCommand(sql, _sqlConn);
             cmd.Parameters.AddWithValue("@username", username);
             cmd.Parameters.AddWithValue("@password", password);
 
@@ -33,8 +33,10 @@ namespace SQLConnection
             {
                 return true;
             }
-            return false;
+            else
+            {
+                return false;
+            }
         }
-
     }
 }
