@@ -2,28 +2,22 @@
 using SQLConnection.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace SQLConnection.Repository
 {
     public class RepoEmployee
     {
-        private SqlConnection _sqlConn;
-
         public void Create(Employee emp)
         {
+            DBConnector.ConnectToDb();
 
-
-            string connString = "Data Source=mssql4.unoeuro.com;Initial Catalog=sambits_dk_db_Saif_DB;User ID=sambits_dk;Password=wAtmzHp3dkyDG4bx6ErR ;Connect Timeout=30;Encrypt=True;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;Command Timeout=30";
-            // sender commands til sql 
+            // sender commands til sql
             string sqlCommand = @"INSERT INTO Employee (FirstName, LastName, PhoneNumber, Email, Hire_Date, HourlyPay)
-                            Values (@FirstName , @LastName,@PhoneNumber ,@Email,@HireDate,@HourlyPay)";
+                                Values (@FirstName , @LastName,@PhoneNumber ,@Email,@Hire_Date,@HourlyPay)";
 
-            //Create connection to DB
-     
-
-
-            SqlCommand cmd = new(sqlCommand, _sqlConn);
+            SqlCommand cmd = new(sqlCommand, DBConnector.sqlConnection);
 
             cmd.Parameters.AddWithValue("@FirstName", emp.FirstName);
             cmd.Parameters.AddWithValue("@LastName", emp.LastName);
@@ -32,14 +26,66 @@ namespace SQLConnection.Repository
             cmd.Parameters.AddWithValue("@Hire_Date", emp.HireDate);
             cmd.Parameters.AddWithValue("@HourlyPay", emp.HourlyPay);
 
-            _sqlConn = new SqlConnection(connString);
-            _sqlConn.Open();
             cmd.ExecuteNonQuery();
+            DBConnector.DisconnectToDb();
         }
 
+        public List<Employee> Read()
+        {
+            DBConnector.ConnectToDb();
+            string sqlCom = @"Select * From Employee ";
 
-      
-            
-        
+            List<Employee> emptyList = new();
+            SqlCommand cmd = new SqlCommand(sqlCom, DBConnector.sqlConnection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                Employee employee = new();
+                employee.EmployeeId = reader.GetInt32(0);
+                employee.FirstName = reader.GetString(1);
+                employee.LastName = reader.GetString(2);
+                employee.PhoneNumber = reader.GetString(3);
+                employee.Email = reader.GetString(4);
+                employee.HireDate = reader.GetDateTime(5);
+                employee.HourlyPay = reader.GetDecimal(6);
+
+                emptyList.Add(employee);
+            }
+
+            reader.Close();
+            DBConnector.DisconnectToDb();
+
+            return emptyList;
+        }
+
+        public void Update(int id, Employee updatedEmployee)
+        {
+            DBConnector.ConnectToDb();
+            string SqlCom = @"Update Employee
+                            SET FirstName = @FirstName,
+                                LastName = @LastName,
+                                PhoneNumber = @PhoneNumber,
+                                Email = @Email,
+                                Hire_Date = @HireDate,
+                                HourlyPay = @HourlyPay
+                            WHERE EmployeeId = @EmployeeId";
+
+            SqlCommand cmd = new(SqlCom, DBConnector.sqlConnection);
+
+            cmd.Parameters.AddWithValue(@"EmployeeId", id);
+            cmd.Parameters.AddWithValue(@"FirstName", updatedEmployee.FirstName);
+            cmd.Parameters.AddWithValue(@"LastName", updatedEmployee.LastName);
+            cmd.Parameters.AddWithValue(@"PhoneNumber", updatedEmployee.PhoneNumber);
+            cmd.Parameters.AddWithValue(@"Email", updatedEmployee.Email);
+            cmd.Parameters.AddWithValue(@"HireDate", updatedEmployee.HireDate);
+            cmd.Parameters.AddWithValue(@"HourlyPay", updatedEmployee.HourlyPay);
+
+            if (cmd.ExecuteNonQuery() > 0)
+            {
+                Console.WriteLine("The Employee has been updated from : ");
+            }
+
+            DBConnector.DisconnectToDb();
+        }
     }
 }

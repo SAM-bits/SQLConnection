@@ -48,3 +48,8 @@ Create table WorkShift(
 	PlanId int FOREIGN KEY (PlanId) references WorkPlan(PlanId) 
 
 );
+
+select * from Employee
+
+delete from Employee
+where EmployeeId = 3

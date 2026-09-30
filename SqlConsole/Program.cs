@@ -7,7 +7,7 @@ namespace SqlConsole
 {
     internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             //DBConnection dbConn = new();
 
@@ -22,22 +22,40 @@ namespace SqlConsole
             //    Console.WriteLine("Password is incorrect");
             //}
 
-            Supervisor test = new();
+            //Employee emp2 = new();
+            //emp2.FirstName = "Hamza";
+            //emp2.LastName = "Madie";
+            //emp2.PhoneNumber = "52177690";
+            //emp2.Email = "HamzaMadie@gmail.com";
+            //emp2.HireDate = DateTime.Now;
+            //emp2.HourlyPay = 695;
 
-            Employee emp1 = new();
-            emp1.FirstName = "Saif";
-            emp1.LastName = "Atyaif";
-            emp1.PhoneNumber = "52177690";
-            emp1.Email = "saifatyaif@gmail.com";
-            emp1.HireDate = DateTime.Now;
-            emp1.HourlyPay = 260;
+            //RepoEmployee create = new();
+            //create.Create(emp2);
 
-            RepoEmployee create = new();
-            create.Create(emp1);
+            //RepoEmployee employees = new();
 
+            //List<Employee> test = employees.Read();
 
-            
+            //foreach (Employee item in test)
+            //{
+            //    Console.WriteLine(item.ToString());
+            //}
 
+            //Employee employee = new();
+            //employee.FirstName = "HamzaChanged";
+            //employee.LastName = "MadieChanged";
+            //employee.PhoneNumber = "52177690";
+            //employee.Email = "Hamza.B.Madie@gmail.com";
+            //employee.HireDate = DateTime.Now;
+            //employee.HourlyPay = 840;
+
+            //employees.Update(4, employee);
+
+            Employee testEmployee = new();
+            testEmployee.FirstName = "Bo";
+            testEmployee.PhoneNumber = "!+4552177690";
+            Console.WriteLine(testEmployee);
         }
     }
 }
