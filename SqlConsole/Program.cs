@@ -33,7 +33,7 @@ namespace SqlConsole
             //RepoEmployee create = new();
             //create.Create(emp2);
 
-            //RepoEmployee employees = new();
+            RepoEmployee employees = new();
 
             //List<Employee> test = employees.Read();
 
@@ -52,10 +52,7 @@ namespace SqlConsole
 
             //employees.Update(4, employee);
 
-            Employee testEmployee = new();
-            testEmployee.FirstName = "Bo";
-            testEmployee.PhoneNumber = "!+4552177690";
-            Console.WriteLine(testEmployee);
+            employees.Delete(6);
         }
     }
 }
