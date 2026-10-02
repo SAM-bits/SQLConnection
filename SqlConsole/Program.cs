@@ -33,7 +33,29 @@ namespace SqlConsole
             //RepoEmployee create = new();
             //create.Create(emp2);
 
-            RepoEmployee employees = new();
+            //RepoEmployee employees = new();
+
+            //Supervisor supervisor1 = new();
+            //RepoSupervoiser supervoiserTest = new();
+            //List<Supervisor> readSuper = supervoiserTest.ReadById(1);
+
+            //foreach (Supervisor item in readSuper)
+            //{
+            //    Console.WriteLine(item);
+
+            //    foreach (Supervisor item in readSuper)
+            //    {
+            //        Console.WriteLine(item);
+            //    }
+
+            //    supervisor1.FirstName = "Saif";
+            //    supervisor1.LastName = "Madie";
+            //    supervisor1.PhoneNumber = "52177690";
+            //    supervisor1.Email = "Saifatyaif@gmail.com";
+            //    supervisor1.HireDate = DateTime.Now;
+            //    supervisor1.HourlyPay = 890;
+
+            //supervoiserTest.Create(supervisor1);
 
             //List<Employee> test = employees.Read();
 
@@ -52,7 +74,10 @@ namespace SqlConsole
 
             //employees.Update(4, employee);
 
-            employees.Delete(6);
+            RepoWorkShift workShift = new();
+
+            Console.WriteLine(workShift.SupervisorTotalHourAndPayment(4));
+            Console.WriteLine(workShift.EmployeeTotalHourAndPayment(15));
         }
     }
 }
