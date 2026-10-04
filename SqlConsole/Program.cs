@@ -74,7 +74,7 @@ namespace SqlConsole
 
             //employees.Update(4, employee);
 
-            RepoWorkShift workShift = new();
+            RepoPayment workShift = new();
 
             Console.WriteLine(workShift.SupervisorTotalHourAndPayment(4));
             Console.WriteLine(workShift.EmployeeTotalHourAndPayment(15));

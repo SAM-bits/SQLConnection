@@ -6,14 +6,14 @@ using System.Text;
 
 namespace SQLConnection.Repository
 {
-    public class RepoWorkShift
+    public class RepoPayment
     {
-        public string? EmployeeName { get; set; }
-        public string? SupervisorName { get; set; }
+        public string EmployeeName { get; set; }
+        public string SupervisorName { get; set; }
         public int TotalHour { get; set; }
         public decimal TotalPay { get; set; }
 
-        public RepoWorkShift SupervisorTotalHourAndPayment(int id)
+        public RepoPayment SupervisorTotalHourAndPayment(int id)
         {
             DBConnector.ConnectToDb();
 
@@ -29,7 +29,7 @@ namespace SQLConnection.Repository
             cmd.Parameters.AddWithValue(@"id", id);
             SqlDataReader reader = cmd.ExecuteReader();
 
-            RepoWorkShift result = new();
+            RepoPayment result = new();
 
             while (reader.Read())
             {
@@ -44,7 +44,7 @@ namespace SQLConnection.Repository
             return result;
         }
 
-        public RepoWorkShift EmployeeTotalHourAndPayment(int id)
+        public RepoPayment EmployeeTotalHourAndPayment(int id)
         {
             DBConnector.ConnectToDb();
 
@@ -60,7 +60,7 @@ namespace SQLConnection.Repository
             cmd.Parameters.AddWithValue(@"id", id);
             SqlDataReader reader = cmd.ExecuteReader();
 
-            RepoWorkShift result = new();
+            RepoPayment result = new();
 
             while (reader.Read())
             {
