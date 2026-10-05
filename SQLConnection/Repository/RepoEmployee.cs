@@ -58,7 +58,7 @@ namespace SQLConnection.Repository
             return emptyList;
         }
 
-        public void Update(int id, Employee updatedEmployee)
+        public void Update(Employee updatedEmployee)
         {
             DBConnector.ConnectToDb();
             string SqlCom = @"Update Employee
@@ -72,7 +72,7 @@ namespace SQLConnection.Repository
 
             SqlCommand cmd = new(SqlCom, DBConnector.sqlConnection);
 
-            cmd.Parameters.AddWithValue(@"EmployeeId", id);
+            cmd.Parameters.AddWithValue(@"EmployeeId", updatedEmployee.EmployeeId);
             cmd.Parameters.AddWithValue(@"FirstName", updatedEmployee.FirstName);
             cmd.Parameters.AddWithValue(@"LastName", updatedEmployee.LastName);
             cmd.Parameters.AddWithValue(@"PhoneNumber", updatedEmployee.PhoneNumber);
@@ -82,7 +82,31 @@ namespace SQLConnection.Repository
 
             if (cmd.ExecuteNonQuery() > 0)
             {
-                Console.WriteLine("The Employee has been updated from : ");
+                Console.WriteLine("The Employee has been updated! ");
+            }
+
+            DBConnector.DisconnectToDb();
+        }
+
+        public void Delete(Employee deletedEmployee)
+        {
+            DBConnector.ConnectToDb();
+
+            string sqlComm = @"DELETE from Employee
+                              Where EmployeeId = @EmployeeId";
+
+            SqlCommand cmd = new(sqlComm, DBConnector.sqlConnection);
+
+            cmd.Parameters.AddWithValue(@"EmployeeId", deletedEmployee.EmployeeId);
+
+            if (cmd.ExecuteNonQuery() > 0)
+            {
+                Console.WriteLine($"Employee with {deletedEmployee.EmployeeId} Has been Deleted ");
+                Console.WriteLine($"Employee with {deletedEmployee.FirstName} Has been Deleted ");
+            }
+            else
+            {
+                Console.WriteLine($"Cannot find ID: {deletedEmployee.EmployeeId}");
             }
 
             DBConnector.DisconnectToDb();

@@ -33,7 +33,7 @@ namespace SqlConsole
             //RepoEmployee create = new();
             //create.Create(emp2);
 
-            //RepoEmployee employees = new();
+            RepoEmployee employees = new();
 
             //List<Employee> test = employees.Read();
 
@@ -42,20 +42,25 @@ namespace SqlConsole
             //    Console.WriteLine(item.ToString());
             //}
 
-            //Employee employee = new();
-            //employee.FirstName = "HamzaChanged";
-            //employee.LastName = "MadieChanged";
-            //employee.PhoneNumber = "52177690";
-            //employee.Email = "Hamza.B.Madie@gmail.com";
-            //employee.HireDate = DateTime.Now;
-            //employee.HourlyPay = 840;
+            Employee employee = new();
+            employee.EmployeeId = 4;
+            employee.FirstName = "HamzaChanged";
+            employee.LastName = "MadieChanged";
+            employee.PhoneNumber = "52177690";
+            employee.Email = "Hamza.B.Madie@gmail.com";
+            employee.HireDate = DateTime.Now;
+            employee.HourlyPay = 840;
 
-            //employees.Update(4, employee);
+            //employees.Update(employee);
 
-            Employee testEmployee = new();
-            testEmployee.FirstName = "Bo";
-            testEmployee.PhoneNumber = "!+4552177690";
-            Console.WriteLine(testEmployee);
+            //Employee testEmployee = new();
+            //testEmployee.FirstName = "Bo";
+            //testEmployee.PhoneNumber = "!+4552177690";
+            //Console.WriteLine(testEmployee);
+
+            employees.Delete(employee);
+
+
         }
     }
 }
