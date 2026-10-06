@@ -344,14 +344,45 @@ On.WorkShift.SupervisorId = Supervisor.SupervisorId
 where WorkShift.SupervisorId = 4
 group by Supervisor.FirstName
 
--- Payment total for Employee
+-- Payment total for Employee and hours and a date . 
 SELECT SUM(DATEDIFF(HOUR,WorkShift.StartTime,WorkShift.EndTime)) As TotalHour, Sum(DATEDIFF(HOUR,WorkShift.StartTime,WorkShift.EndTime)*Employee.HourlyPay) AS totalPay
 , Employee.FirstName as EmployeName 
 From WorkShift
 inner join Employee
 On.WorkShift.EmployeeId = Employee.EmployeeId
-where WorkShift.EmployeeId = 15
+where WorkShift.EmployeeId = 15 and WorkShift.ShiftDate between '2026-10-1' and '2026-10-20'
+
 group by Employee.FirstName
+
+-- show workhour for 1 month per employee. 
+
+
+
+-- Show All WorkPlan , show all workplan for a month.
+Select * from WorkPlan
+
+-- shows all workplan with the attached employeeid to it. 
+Select * from WorkPlan
+inner join Employee 
+on Employee.EmployeeId = Employee.EmployeeId
+
+
+Select * from WorkShift
+inner join Employee
+on Employee.EmployeeId = Employee.EmployeeId
+
+
+
+
+
+
+
 
 
 select * from Employee
+Delete from Employee
+where EmployeeId = 18;
+
+INSERT INTO Employee (FirstName, LastName, PhoneNumber, Email, Hire_Date, HourlyPay)
+VALUES
+('Kasper', 'Nielsen', '22112233', 'Kaspernilsen@firma.dk', '2024-01-15', 150.00);

@@ -147,7 +147,7 @@ namespace SQLConnection.Repository
                                 Where SupervisorId = @id";
 
             SqlCommand cmd = new(sqlComm, DBConnector.sqlConnection);
-            cmd.Parameters.AddWithValue(@"SupervisorId", id);
+            cmd.Parameters.AddWithValue(@"@id", id);
 
             if (cmd.ExecuteNonQuery() > 0)
             {

@@ -97,7 +97,7 @@ namespace SQLConnection.Repository
 
             SqlCommand cmd = new(sqlComm, DBConnector.sqlConnection);
 
-            cmd.Parameters.AddWithValue(@"EmployeeId", id);
+            cmd.Parameters.AddWithValue(@"@EmployeeId", id);
 
             if (cmd.ExecuteNonQuery() > 0)
             {

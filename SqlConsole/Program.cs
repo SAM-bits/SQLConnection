@@ -74,10 +74,14 @@ namespace SqlConsole
 
             //employees.Update(4, employee);
 
-            RepoPayment workShift = new();
+            //RepoPayment workShift = new();
 
-            Console.WriteLine(workShift.SupervisorTotalHourAndPayment(4));
-            Console.WriteLine(workShift.EmployeeTotalHourAndPayment(15));
+            //Console.WriteLine(workShift.SupervisorTotalHourAndPayment(4));
+            //Console.WriteLine(workShift.EmployeeTotalHourAndPayment(15));
+
+            RepoEmployee test = new();
+
+            test.Delete(19);
         }
     }
 }
