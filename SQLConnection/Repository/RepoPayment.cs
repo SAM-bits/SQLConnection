@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using SQLConnection.Interface;
 using SQLConnection.Model;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace SQLConnection.Repository
 {
-    public class RepoPayment
+    public class RepoPayment : IRepoPayment
     {
         public string EmployeeName { get; set; }
         public string SupervisorName { get; set; }

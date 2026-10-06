@@ -88,5 +88,10 @@ group by Supervisor.FirstName
 
 select * from employee
 
+select * from Supervisor
+
+delete from Supervisor
+where SupervisorId = 3
+
 delete from Employee
-where Employee.EmployeeId=15
+where Employee.EmployeeId=14

@@ -96,7 +96,7 @@ namespace SQLConnection.Model
                 $"Phone Number: {PhoneNumber}\n" +
                 $"Email: {Email}\n" +
                 $"Date of hire: {HireDate}\n" +
-                $"Hurly pay : {HourlyPay} KR\n";
+                $"Hourly pay : {HourlyPay} KR\n";
         }
     }
 }

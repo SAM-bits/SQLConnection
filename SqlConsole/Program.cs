@@ -1,4 +1,5 @@
 ﻿using SQLConnection;
+using SQLConnection.Interface;
 using SQLConnection.Model;
 using SQLConnection.Repository;
 using System.Data.Common;
@@ -9,26 +10,23 @@ namespace SqlConsole
     {
         private static void Main(string[] args)
         {
-            /// Creating new employee :
-            ///
+            ///////////////////// Creating new employee\\\\\\\\\\\\\\\\\\\\\
+
+            //IRepoEmployee repoEmployeeCreate = new RepoEmployee();
 
             //Employee employee1 = new();
-            //employee1.FirstName = "ConsoleAppEmployee";
+            //employee1.FirstName = "ConsoleAppEmployeeRepo";
             //employee1.LastName = "ConsoleAppEmployee";
             //employee1.PhoneNumber = "52177690";
             //employee1.Email = "ConsoleAppEmployee@gmail.com";
             //employee1.HireDate = DateTime.Now;
             //employee1.HourlyPay = 100;
 
-            //RepoEmployee EmployeeCreate = new();
-            //EmployeeCreate.Create(employee1);
+            //repoEmployeeCreate.Create(employee1);
 
+            ///////////////////// Creating new Supervisor\\\\\\\\\\\\\\\\\\\\\
 
-
-
-            /// Creating new employee :
-            ///
-
+            //IRepoSupervoiser repoSupervoiserCreate = new RepoSupervoiser();
             //Supervisor supervisor1 = new();
             //supervisor1.FirstName = "ConsoleAppSuperVisor";
             //supervisor1.LastName = "ConsoleAppSuperVisor";
@@ -37,84 +35,84 @@ namespace SqlConsole
             //supervisor1.HireDate = DateTime.Now;
             //supervisor1.HourlyPay = 100;
 
-            //RepoSupervoiser supervisorCreate = new();
-            //supervisorCreate.Create(supervisor1);
+            //repoSupervoiserCreate.Create(supervisor1);
 
+            ///////////////////// Show Supervisor by Id or all \\\\\\\\\\\\\\\\\\\\\
 
-
-            /// Show Supervisor by ID 
-            //Supervisor supervisoerReadById = new();
-            //RepoSupervoiser supervoiserTest = new();
-            //List<Supervisor> readSuper = supervoiserTest.ReadById(1);
+            //IRepoSupervoiser showSupervisor = new RepoSupervoiser();
+            //List<Supervisor> readSuper = showSupervisor.ReadById(1);
 
             //foreach (Supervisor item in readSuper)
             //{
             //    Console.WriteLine(item);
-
             //}
 
+            //List<Supervisor> readSupervisorAll = showSupervisor.Read();
+            //foreach (Supervisor item in readSupervisorAll)
+            //{
+            //    Console.WriteLine(item);
+            //}
 
+            ///////////////////// Show Employee by Id or All: \\\\\\\\\\\\\\\\\\\\\
 
-            /// Show Employee by ID Mangler : 
-            Employee employeeReadById = new();
-            RepoEmployee employeeTest = new();
-            List<Employee> readEmployee = employeeTest.ReadById(1);
+            //IRepoEmployee ShowEmployee = new RepoEmployee();
+            //List<Employee> readEmployeeById = ShowEmployee.ReadById(1);
 
-            foreach (Employee item in readEmployee)
-            {
-                Console.WriteLine(item);
+            //foreach (Employee item in readEmployeeById)
+            //{
+            //    Console.WriteLine(item);
+            //}
 
-            }
+            //List<Employee> readAllEmployee = ShowEmployee.Read();
 
+            //foreach (Employee item in readAllEmployee)
+            //{
+            //    Console.WriteLine(item);
+            //}
 
+            ///////////////////// Update Employee by Id : \\\\\\\\\\\\\\\\\\\\\
 
+            //IRepoEmployee updatedEmplyee = new RepoEmployee();
 
+            //Employee employeeUpdate = new();
+            //employeeUpdate.EmployeeId = 16;
+            //employeeUpdate.FirstName = "ConsoleAppUpdated";
+            //employeeUpdate.LastName = "ConsoleAppUpdated";
+            //employeeUpdate.PhoneNumber = "52177690";
+            //employeeUpdate.Email = "Hamza.B.Madie@gmail.comUpdated";
+            //employeeUpdate.HireDate = DateTime.Now;
+            //employeeUpdate.HourlyPay = 560;
 
+            //updatedEmplyee.Update(employeeUpdate);
 
+            ///////////////////// Update Supervisor by Id : \\\\\\\\\\\\\\\\\\\\\
 
-                //foreach (Supervisor item in readSuper)
-                //{
-                //    Console.WriteLine(item);
-                //}
+            //IRepoSupervoiser updatedSupervisor = new RepoSupervoiser();
+            //Supervisor supervisorUpdate = new();
+            //supervisorUpdate.SupervisorId = 4;
+            //supervisorUpdate.FirstName = "SupervisorUpdated";
+            //supervisorUpdate.LastName = "SupervisorUpdated";
+            //supervisorUpdate.PhoneNumber = "52177690";
+            //supervisorUpdate.Email = "SupervisorUpdated@gmail.com";
+            //supervisorUpdate.HireDate = DateTime.Now;
+            //supervisorUpdate.HourlyPay = 840;
 
-                //    supervisor1.FirstName = "Saif";
-                //    supervisor1.LastName = "Madie";
-                //    supervisor1.PhoneNumber = "52177690";
-                //    supervisor1.Email = "Saifatyaif@gmail.com";
-                //    supervisor1.HireDate = DateTime.Now;
-                //    supervisor1.HourlyPay = 890;
+            //updatedSupervisor.Update(supervisorUpdate);
 
-                //supervoiserTest.Create(supervisor1);
+            ///////////////////// Delete Employee/Supervisor by Id : \\\\\\\\\\\\\\\\\\\\\
 
-                //List<Employee> test = employees.Read();
+            //IRepoEmployee repoEmployee = new RepoEmployee();
+            //IRepoSupervoiser repoSupervoiser = new RepoSupervoiser();
 
-                //foreach (Employee item in test)
-                //{
-                //    Console.WriteLine(item.ToString());
-                //}
+            //repoEmployee.Delete(16);
+            //repoSupervoiser.Delete(4);
 
-                //Employee employee = new();
-                //employee.EmployeeId = 4;
-                //employee.FirstName = "HamzaChanged";
-                //employee.LastName = "MadieChanged";
-                //employee.PhoneNumber = "52177690";
-                //employee.Email = "Hamza.B.Madie@gmail.com";
-                //employee.HireDate = DateTime.Now;
-                //employee.HourlyPay = 840;
+            ///////////////////// Delete Employee/Supervisor by Id : \\\\\\\\\\\\\\\\\\\\\
 
-                //employees.Update(employee);
+            IRepoPayment repoPayment = new RepoPayment();
 
-                //Employee testEmployee = new();
-                //testEmployee.FirstName = "Bo";
-                //testEmployee.PhoneNumber = "!+4552177690";
-                //Console.WriteLine(testEmployee);
-
-                //employees.Delete(employee);
-
-                //RepoPayment workShift = new();
-
-                //Console.WriteLine(workShift.SupervisorTotalHourAndPayment(4));
-                //Console.WriteLine(workShift.EmployeeTotalHourAndPayment(15));
-            }
+            Console.WriteLine(repoPayment.SupervisorTotalHourAndPayment(1));
+            Console.WriteLine(repoPayment.EmployeeTotalHourAndPayment(1));
         }
     }
+}

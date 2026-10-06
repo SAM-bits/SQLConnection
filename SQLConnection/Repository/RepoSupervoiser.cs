@@ -8,7 +8,7 @@ using System.Text;
 
 namespace SQLConnection.Repository
 {
-    public class RepoSupervoiser
+    public class RepoSupervoiser : IRepoSupervoiser
     {
         public void Create(Supervisor supervisor)
         {
@@ -110,22 +110,23 @@ namespace SQLConnection.Repository
             DBConnector.ConnectToDb();
 
             string sqlComm = @"Update Supervisor
-                                SET FirstName = @FirstName
-                                    LastName = @LastName
-                                    PhoneNumber = @PhoneNumber
-                                    Email = @Email
-                                    Hire_date = @HireDate
+                                SET FirstName = @FirstName,
+                                    LastName = @LastName,
+                                    PhoneNumber = @PhoneNumber,
+                                    Email = @Email,
+                                    Hire_date = @Hire_Date,
                                     HourlyPay = @HourlyPay
-                                Where SupervisorId = @SuperviserId";
+                                WHERE SupervisorId = @SupervisorId";
 
             SqlCommand cmd = new(sqlComm, DBConnector.sqlConnection);
 
+            cmd.Parameters.AddWithValue(@"SupervisorId", updatedSupervisor.SupervisorId);
             cmd.Parameters.AddWithValue(@"FirstName", updatedSupervisor.FirstName);
             cmd.Parameters.AddWithValue(@"LastName", updatedSupervisor.LastName);
             cmd.Parameters.AddWithValue(@"PhoneNumber", updatedSupervisor.PhoneNumber);
             cmd.Parameters.AddWithValue(@"Email", updatedSupervisor.Email);
             cmd.Parameters.AddWithValue(@"Hire_date", updatedSupervisor.HireDate);
-            cmd.Parameters.AddWithValue(@"HorulyPay", updatedSupervisor.HourlyPay);
+            cmd.Parameters.AddWithValue(@"HourlyPay", updatedSupervisor.HourlyPay);
 
             if (cmd.ExecuteNonQuery() > 0)
             {
@@ -151,7 +152,7 @@ namespace SQLConnection.Repository
 
             if (cmd.ExecuteNonQuery() > 0)
             {
-                Console.WriteLine($"Supervisor with ID :{id} ");
+                Console.WriteLine($"Supervisor with ID :{id} DELETED ");
             }
             else
             {

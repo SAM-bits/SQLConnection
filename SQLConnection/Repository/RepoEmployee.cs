@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using SQLConnection.Interface;
 using SQLConnection.Model;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace SQLConnection.Repository
 {
-    public class RepoEmployee
+    public class RepoEmployee : IRepoEmployee
     {
         public void Create(Employee emp)
         {
@@ -26,7 +27,14 @@ namespace SQLConnection.Repository
             cmd.Parameters.AddWithValue("@Hire_Date", emp.HireDate);
             cmd.Parameters.AddWithValue("@HourlyPay", emp.HourlyPay);
 
-            cmd.ExecuteNonQuery();
+            if (cmd.ExecuteNonQuery() > 0)
+            {
+                Console.WriteLine("Employee Has been created ");
+            }
+            else
+            {
+                throw new ArgumentException("Creating employee completed with error. try again!");
+            }
             DBConnector.DisconnectToDb();
         }
 
@@ -58,6 +66,37 @@ namespace SQLConnection.Repository
             return emptyList;
         }
 
+        public List<Employee> ReadById(int id)
+        {
+            DBConnector.ConnectToDb();
+
+            string sqlComm = @"Select * from Employee
+                                Where EmployeeId = @id";
+
+            SqlCommand cmd = new SqlCommand(sqlComm, DBConnector.sqlConnection);
+
+            cmd.Parameters.AddWithValue(@"@id", id);
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<Employee> returnFound = new();
+            Employee foundEmployee = new();
+
+            while (reader.Read())
+            {
+                foundEmployee.EmployeeId = reader.GetInt32(0);
+                foundEmployee.FirstName = reader.GetString(1);
+                foundEmployee.LastName = reader.GetString(2);
+                foundEmployee.PhoneNumber = reader.GetString(3);
+                foundEmployee.Email = reader.GetString(4);
+                foundEmployee.HireDate = reader.GetDateTime(5);
+                foundEmployee.HourlyPay = reader.GetDecimal(6);
+
+                returnFound.Add(foundEmployee);
+            }
+            reader.Close();
+            DBConnector.DisconnectToDb();
+            return returnFound;
+        }
+
         public void Update(Employee updatedEmployee)
         {
             DBConnector.ConnectToDb();
@@ -83,6 +122,10 @@ namespace SQLConnection.Repository
             if (cmd.ExecuteNonQuery() > 0)
             {
                 Console.WriteLine("The Employee has been updated! ");
+            }
+            else
+            {
+                throw new ArgumentException("Cannot update employee.");
             }
 
             DBConnector.DisconnectToDb();
@@ -125,7 +168,7 @@ namespace SQLConnection.Repository
 
             if (cmd.ExecuteNonQuery() > 0)
             {
-                Console.WriteLine($"Employee with Id : {id} Has been deleted");
+                Console.WriteLine($"Employee with Id : {id} DELETED");
             }
             else
             {
