@@ -111,5 +111,28 @@ namespace SQLConnection.Repository
 
             DBConnector.DisconnectToDb();
         }
+
+        public void Delete(int id)
+        {
+            DBConnector.ConnectToDb();
+
+            string sqlComm = @"Delete from Employee
+                                Where EmployeeId = @EmployeeId";
+
+            SqlCommand cmd = new(sqlComm, DBConnector.sqlConnection);
+
+            cmd.Parameters.AddWithValue(@"EmployeeId", id);
+
+            if (cmd.ExecuteNonQuery() > 0)
+            {
+                Console.WriteLine($"Employee with Id : {id} Has been deleted");
+            }
+            else
+            {
+                Console.WriteLine("Cannot find Id , try again. ");
+            }
+
+            DBConnector.DisconnectToDb();
+        }
     }
 }
